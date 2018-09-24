@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+my $pid = shift;
+die "Usage: $0 <pid> <command...>" unless $pid =~ /^\d+$/ && @ARGV;
+
+print STDERR "Queueing process $$ after process $pid\n";
+sleep 1 while -e "/proc/$pid";
+exec @ARGV;
